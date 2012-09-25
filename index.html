@@ -92,14 +92,15 @@ h2 {
   <button>SUB<span>TIM</span></button>
   <h2>UPSOsidedowninator</h2>
 </form>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="vendor/jquery-1.7.1.min.js">\x3C/script>')</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="vendor/jquery-1.8.2.min.js">\x3C/script>')</script>
 <script>
 $(document).ready(function(){
   $('form').on('submit',function(e) {
     e.preventDefault();
-    var iframeurl = $(this).find('#url').val();
     $('form').remove();
+    $('body').css('background','white');
+    var iframeurl = $(this).find('#url').val();
     $('iframe').remove();
     document.title = iframeurl + ' | upsidedownater';
     $('body').append('<iframe src="'+iframeurl+'"></iframe>');
