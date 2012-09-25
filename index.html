@@ -95,16 +95,41 @@ h2 {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="vendor/jquery-1.8.2.min.js">\x3C/script>')</script>
 <script>
+/** 
+ * This code snatched from http://stackoverflow.com/a/2880929
+ */
+var urlParams = {};
+(function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+
+/**
+ * Pulled this out to a separate function that could just get reused.
+ */
+function upso_that_thing(url) {
+  $('form').remove();
+  $('body').css('background','white');
+  $('iframe').remove();
+  document.title = url + ' | upsidedownater';
+  $('body').append('<iframe src="' + url + '"></iframe>');
+}
+
 $(document).ready(function(){
   $('form').on('submit',function(e) {
     e.preventDefault();
-    $('form').remove();
-    $('body').css('background','white');
     var iframeurl = $(this).find('#url').val();
-    $('iframe').remove();
-    document.title = iframeurl + ' | upsidedownater';
-    $('body').append('<iframe src="'+iframeurl+'"></iframe>');
+    upso_that_thing(iframeurl);
   });
+  if (urlParams['url']) {
+    upso_that_thing(urlParams['url']);
+  } 
 });
 </script>
 </body>
